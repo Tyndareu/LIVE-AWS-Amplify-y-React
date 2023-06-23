@@ -17,6 +17,12 @@
       },
       "auth": {
         "liveawsamplifyyreact315398c7": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2dx15g12upz1z",
+          "type": "manual"
+        }
       }
     }
   }
