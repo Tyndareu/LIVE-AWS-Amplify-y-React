@@ -1,8 +1,13 @@
+import { Button } from "@rewind-ui/core";
 
-export default function ButtonViews({done, setDone}) {
+export default function ButtonViews({ done, setDone, setNewTask, setTasks }) {
   return (
-    <button onClick={() => setDone(!done)}>
-    {done ? "View Incomplete Tasks" : "View Completed Tasks"}
-  </button>
-  )
+    <Button
+      onClick={() => { setTasks([]);setDone(!done);setNewTask(false) }}
+      color="blue"
+      shadow="md"
+    >
+      {done ? "View Incomplete Tasks" : "View Completed Tasks"}
+    </Button>
+  );
 }

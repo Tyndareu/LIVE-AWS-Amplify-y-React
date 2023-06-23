@@ -5,28 +5,37 @@ import { listTodos } from "./graphql/queries";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import Tasks from "./components/Tasks";
-//import FormTask from "./components/FormTask";
-import {  FormTask  } from './ui-components';
+import FormTask from "./components/FormTask";
+//import {  FormTask  } from './ui-components';
 import Header from "./components/Header";
 import ButtonViews from "./components/ButtonViews";
 import toast, { Toaster } from "react-hot-toast";
+import ButtonNewTask from "./components/ButtonNewTask";
 
 function App({ signOut, user }) {
-  const [task, setTask] = useState({
+  const initialValues = {
     name: "",
     description: "",
     userMail: user.attributes.email,
     done: false,
-  });
+    priority: "low",
+  };
+  const [task, setTask] = useState(initialValues);
   const [loadData, setLoadData] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [done, setDone] = useState(false);
+  const [newTask, setNewTask] = useState(false);
 
-  const handleSubmit = async () => {
-    task.userMail = user.attributes.email
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    task.userMail = user.attributes.email;
     await API.graphql(graphqlOperation(createTodo, { input: task }))
       .then(() => {
         toast.success("Created!");
+        setTask(initialValues);
+        setNewTask(false);
+        done && setDone(false);
+        console.log(done);
         setLoadData(!loadData);
       })
       .catch((err) => {
@@ -80,34 +89,27 @@ function App({ signOut, user }) {
         console.log(error);
       }
     };
-    const myPromise = fetchData();
-    toast.promise(myPromise, {
-      loading: "Loading",
-      success: "Got the data",
-      error: (err) => `This just happened: ${err.toString()}`,
-    });
+    fetchData();
   }, [done, loadData, user.attributes.email]);
 
   return (
     <>
       <Header signOut={signOut} mail={user.attributes.email} />
-      <ButtonViews setDone={setDone} done={done} />
-      <h3>New Task</h3>
-      <FormTask
-  onSubmit={fields => {
-    handleSubmit(fields) 
-    setTask(fields)}}
-/>
-     
-      <Tasks
-        tasks={tasks}
-        handleDelete={handleDelete}
-        handleDone={handleDone}
-      />
+      <ButtonViews setDone={setDone} done={done} setNewTask={setNewTask} setTasks={setTasks}/>
+      <ButtonNewTask setNewTask={setNewTask} newTask={newTask} />
+      {newTask && (
+        <FormTask handleSubmit={handleSubmit} setTask={setTask} task={task} />
+      )}
+      {!newTask && (
+        <Tasks
+          tasks={tasks}
+          handleDelete={handleDelete}
+          handleDone={handleDone}
+        />
+      )}
       <Toaster />
     </>
   );
 }
 
 export default withAuthenticator(App);
-

@@ -59,8 +59,10 @@ export default function FormTask(props) {
   };
   return (
     <Grid
-      style={{width:300, margin:'auto', border:'1px solid #ccc', borderRadius:5, padding:"5px"}}
-      as="form"   
+      as="form"
+      rowGap="15px"
+      columnGap="15px"
+      padding="20px"
       onSubmit={async (event) => {
         event.preventDefault();
         const modelFields = {
@@ -92,7 +94,6 @@ export default function FormTask(props) {
       {...getOverrideProps(overrides, "FormTask")}
       {...rest}
     >
-
       <TextField
         label="Name"
         isRequired={true}
@@ -143,7 +144,7 @@ export default function FormTask(props) {
         {...getOverrideProps(overrides, "description")}
       ></TextAreaField>
       <SwitchField
-        label="Completed"
+        label="Done"
         defaultChecked={false}
         isChecked={done}
         onChange={(e) => {

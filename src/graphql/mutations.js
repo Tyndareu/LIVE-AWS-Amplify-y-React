@@ -12,6 +12,8 @@ export const createTodo = /* GraphQL */ `
       description
       done
       userMail
+      priority
+      dataEnd
       createdAt
       updatedAt
       __typename
@@ -29,6 +31,8 @@ export const updateTodo = /* GraphQL */ `
       description
       done
       userMail
+      priority
+      dataEnd
       createdAt
       updatedAt
       __typename
@@ -46,6 +50,8 @@ export const deleteTodo = /* GraphQL */ `
       description
       done
       userMail
+      priority
+      dataEnd
       createdAt
       updatedAt
       __typename

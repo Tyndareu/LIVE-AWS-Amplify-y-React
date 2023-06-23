@@ -4,5 +4,7 @@ type Todo @model @auth(rules: [{allow: public}]) {
   description: String
   done: Boolean
   userMail: String
+  priority: String
+  dataEnd: AWSDate
 }
  

@@ -1,27 +1,55 @@
-export default function Tasks({ tasks , handleDelete, handleDone }) {
+import { Button } from "@rewind-ui/core";
+export default function Tasks({ tasks, handleDelete, handleDone }) {
   return (
-    <div
-      style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
-    >
+    <div className="flex flex-wrap justify-center gap-2 mt-3">
       {tasks.map((task) => (
-        <div
-          key={task.id}
-          style={{ width: 300, border: "1px solid black", margin: "10px", borderRadius: "10px" }}
-        >
-          <h2>{task.name}</h2>
-          <p>{task.description}</p>
-          <p>{task.done && "Done"}</p>
-          <p>
-            Creation date:{" "}
-            {task.createdAt.split("T")[0].split("-").reverse().join("/")}
-          </p>
+        <div className="flex flex-col" key={task.id}>
           <div
-            style={{ display: "flex", gap: "10px", justifyContent: "center" }}
+            style={
+              task.priority === "high"
+                ? { backgroundColor: "#ff000050" }
+                : task.priority === "medium"
+                ? { backgroundColor: "#ffff0050" }
+                : { background: "#00ff0050" }
+            }
+            className="w-80 p-2 border border-purple-400 rounded-lg"
+            
           >
-            <button onClick={() => handleDone(task)}>
-              {task.done ? "Undone" : "Done"}
-            </button>
-            <button onClick={() => handleDelete(task)}>Delete</button>
+            <h2>{task.name}</h2>
+            <p>{task.description}</p>
+            <p>{task.done && "Done"}</p>
+            <p>Priority: {task.priority} </p>
+            <p>
+              {" "}
+              {task.dataEnd &&
+                `Limit Date: ${task.dataEnd.split("-").reverse().join("/")}`}
+            </p>
+            <p>
+              Creation date:{" "}
+              {task.createdAt.split("T")[0].split("-").reverse().join("/")}
+            </p>
+          </div>
+          <div className="flex gap-2 mt-1 justify-center">
+            <Button
+              color="green"
+              shadow="md"
+              shadowColor="black"
+              radius="lg"
+              size="sm"
+              onClick={() => handleDone(task)}
+            >
+              {task.done ? "Incompleted" : "Completed"}
+            </Button>
+            <Button
+              color="red"
+              shadow="md"
+              shadowColor="black"
+              radius="lg"
+              size="sm"
+              onClick={() => handleDelete(task)}
+            >
+              Delete{" "}
+            </Button>
           </div>
         </div>
       ))}
