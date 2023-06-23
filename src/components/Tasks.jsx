@@ -6,7 +6,7 @@ export default function Tasks({ tasks , handleDelete, handleDone }) {
       {tasks.map((task) => (
         <div
           key={task.id}
-          style={{ width: 300, border: "1px solid black", margin: "10px" }}
+          style={{ width: 300, border: "1px solid black", margin: "10px", borderRadius: "10px" }}
         >
           <h2>{task.name}</h2>
           <p>{task.description}</p>

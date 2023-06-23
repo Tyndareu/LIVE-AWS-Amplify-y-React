@@ -29,7 +29,7 @@ export default function FormTask({ handleSubmit, setTask, task }) {
           onChange={(e) => setTask({ ...task, description: e.target.value })}
         ></textarea>
 
-        <button>Submit</button>
+        <button disabled={task.name.length === 0 || task.description.length === 0}>Submit</button>
       </form>
     </div>
   );

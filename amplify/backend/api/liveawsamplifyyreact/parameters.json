@@ -1,5 +1,6 @@
 {
   "AppSyncApiName": "liveawsamplifyyreact",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2023-06-23T08:42:38.585Z"
 }
