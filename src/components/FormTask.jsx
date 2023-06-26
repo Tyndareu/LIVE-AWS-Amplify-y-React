@@ -1,9 +1,9 @@
-import { FormControl, Button, Input, Textarea, Select } from "@rewind-ui/core";
+import { Button, Input, Textarea, Select } from "@rewind-ui/core";
 
 export default function FormTask({ handleSubmit, setTask, task }) {
   return (
     <div className="flex flex-col items-center mt-3">
-      <h1>Add Task</h1>
+      <h1 className="mb-1">Add Task</h1>
       <form
         onSubmit={(e) => {handleSubmit(e)}}
         className="flex flex-col items-center m-auto gap-1"
@@ -20,8 +20,8 @@ export default function FormTask({ handleSubmit, setTask, task }) {
           placeholder="description"
           onChange={(e) => setTask({ ...task, description: e.target.value })}
         ></Textarea>
-        <div className="flex gap-10 items-center">
-          <FormControl.Label>Priority</FormControl.Label>
+        <div className="flex gap-14 items-center">
+          <p>Priority</p>
           <Select
             style={{ width: 200 }}
             value={task.priority}
@@ -32,8 +32,8 @@ export default function FormTask({ handleSubmit, setTask, task }) {
             <option value="high">High</option>
           </Select>
         </div>
-        <div className="flex gap-10 items-center">
-          <FormControl.Label>Date Limit: </FormControl.Label>
+        <div className="flex gap-8 items-center">
+          <p>Date Limit: </p>
           <Input
             onChange={(e) => setTask({ ...task, dataEnd: e.target.value })}
             style={{ width: 200 }}

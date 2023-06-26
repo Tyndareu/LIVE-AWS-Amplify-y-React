@@ -44,7 +44,6 @@ function App({ signOut, user }) {
   };
 
   const handleDelete = async (task) => {
-    console.log(task.id);
     try {
       await API.graphql(
         graphqlOperation(deleteTodo, { input: { id: task.id } })
@@ -61,6 +60,22 @@ function App({ signOut, user }) {
       const input = {
         id: task.id,
         done: !task.done,
+      };
+      await API.graphql(graphqlOperation(updateTodo, { input }));
+      toast.success("Updated!");
+      setLoadData(!loadData);
+    } catch (err) {
+      toast.error("Updated Error!");
+      console.log(err);
+    }
+  };
+
+  const handlePriority = async (e, task,) => {
+    e.preventDefault()
+    try {
+      const input = {
+        id: task.id,
+        priority: e.target.value,
       };
       await API.graphql(graphqlOperation(updateTodo, { input }));
       toast.success("Updated!");
@@ -105,6 +120,7 @@ function App({ signOut, user }) {
           tasks={tasks}
           handleDelete={handleDelete}
           handleDone={handleDone}
+          handlePriority={handlePriority}
         />
       )}
       <Toaster />
